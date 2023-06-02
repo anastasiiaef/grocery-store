@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class GroceryStoreController {
 
 	/**
-	 * Test
+	 * Test Test
 	 * @return
 	 */
 	@RequestMapping("/start")
