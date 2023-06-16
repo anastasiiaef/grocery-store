@@ -19,6 +19,8 @@ public class GroceryStoreController {
 		return "home";
 	}
 	
+	
+	
 	/**
 	 * Handle the /home endpoint.
 	 * @return
