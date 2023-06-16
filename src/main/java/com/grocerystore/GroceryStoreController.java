@@ -19,10 +19,8 @@ public class GroceryStoreController {
 		return "home";
 	}
 	
-	
-	
 	/**
-	 * Handle the /home endpoint.
+	 * Handle the /home endspoint.
 	 * @return
 	 */
 	@RequestMapping(value="/home", method=RequestMethod.GET, headers= {"content-type=text/json"})
