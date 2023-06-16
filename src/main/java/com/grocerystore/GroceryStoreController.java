@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class GroceryStoreController {
-
+	
 	/**
 	 * Handle the /home endpoint.
 	 * @return
@@ -45,7 +45,6 @@ public class GroceryStoreController {
 	public String update() {
 		return "home";
 	}
-	
 	
 	@DeleteMapping("/home")
 	public String delete() {
