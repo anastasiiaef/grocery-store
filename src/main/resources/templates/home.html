@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <title>GroceryStore.com</title>
 </head>
 <body>
-Welcom to the Grocery Store!
+Welcome to the Grocery Store!
 </br>
-Home Test
+Your grocery list is :
+<p th:text="${groceryDTO}"/>
 </body>
 </html>
