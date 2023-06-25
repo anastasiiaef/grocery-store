@@ -11,6 +11,8 @@ public class GroceryServiceStub implements IGroceryService {
 	public GroceryDTO fetchById(int id) {
 		GroceryDTO groceryDTO = new GroceryDTO();
 		groceryDTO.setGroceryId(9);
+		groceryDTO.setDescription("A new grocery store application");
+		groceryDTO.setName("Food Pantry");
 		return groceryDTO;
 	}
 

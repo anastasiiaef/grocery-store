@@ -2,6 +2,7 @@ package com.grocerystore;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -22,8 +23,9 @@ public class GroceryStoreController {
 	 * @return
 	 */
 	@RequestMapping(value="/home", method=RequestMethod.GET)
-	public String read() {
+	public String read(Model model) {
 		GroceryDTO groceryDTO = groceryServiceStub.fetchById(9);
+		model.addAttribute("groceryDTO", groceryDTO);
 		return "home";
 	}
 	
@@ -42,6 +44,12 @@ public class GroceryStoreController {
 	 */
 	@PostMapping("/home")
 	public String create() {
+		return "home";
+	}
+	
+	@RequestMapping("/")
+	public String index() {
+		
 		return "home";
 	}
 
