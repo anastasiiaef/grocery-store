@@ -28,7 +28,7 @@ public class GroceryDTO {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return groceryId + " " + name + " ";
+		return groceryId + " " + name + " "+ description;
 	}
 
 }

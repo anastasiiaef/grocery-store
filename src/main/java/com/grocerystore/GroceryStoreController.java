@@ -21,13 +21,19 @@ public class GroceryStoreController {
 	@Autowired
 	private IGroceryService groceryServiceStub;
 	
+	@RequestMapping(value="/savegrocery")
+	public String saveGrocery(GroceryDTO groceryDTO) {
+		groceryDTO.setGroceryId(5);
+		return "home";
+	}
+	
 	/**
 	 * Handle the /home endpoint.
 	 * @return
 	 */
-	@RequestMapping(value="/home", method=RequestMethod.GET)
+	@RequestMapping(value="/home", method=RequestMethod.GET, headers= {"content-type=text/json"})
 	@ResponseBody
-	public GroceryDTO read(Model model) {
+	public GroceryDTO readJSON(Model model) {
 		GroceryDTO groceryDTO = groceryServiceStub.fetchById(9);
 		model.addAttribute("groceryDTO", groceryDTO);
 		return groceryDTO;
@@ -66,8 +72,9 @@ public class GroceryStoreController {
 	 * Handle the /home endpoint.
 	 * @return
 	 */
-	@RequestMapping(value="/home", method=RequestMethod.GET, headers= {"content-type=text/json"})
-	public String readJSON() {
+	@RequestMapping(value="/home", method=RequestMethod.GET)
+	public String read(Model model ) {
+		model.addAttribute("groceryDTO", new GroceryDTO());
 		return "home";
 	}
 		
