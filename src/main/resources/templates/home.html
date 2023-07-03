@@ -9,5 +9,14 @@ Welcome to the Grocery Store!
 </br>
 Your Grocery is:
 <p th:text="${groceryDTO}"/>
+
+<form action="#" th:action="@{/savegrocery}" th:object="${groceryDTO}" method="GET">
+	
+	Name: <input type="text" name="name" th:field="*{name}"/><br/>
+	Description: <input type="text" name="description" th:field="*{description}"/><br/>
+	
+	<button name="submit" type="submit" value="0">Submit</button>
+</form>
+
 </body>
 </html>
