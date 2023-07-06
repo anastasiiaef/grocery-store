@@ -1,5 +1,7 @@
 package com.grocerystore.service;
 
+import java.util.List;
+
 import com.grocerystore.dto.GroceryDTO;
 
 /**
@@ -19,8 +21,15 @@ public interface IGroceryService {
 	/**
 	 * Persist the given DTO
 	 * @param groceryDTO
+	 * @return 
 	 *
 	 */
-	void save(GroceryDTO groceryDTO);
+	GroceryDTO save(GroceryDTO groceryDTO);
+	
+	/**
+	 * Return all grocery products
+	 * @return the collection of products
+	 */
+	List<GroceryDTO> fetchAll();
 
 }
