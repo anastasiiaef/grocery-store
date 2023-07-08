@@ -5,8 +5,13 @@
 <title>GroceryStore.com</title>
 </head>
 <body>
+<form action="#" th:action="@{/searchItems}" method="GET">
 Welcome to the Grocery Store!
+<input type="text" name="searchTerm"/>
+<button name="submit" type="submit" value="0">Search</button>
+</form>
 </br>
+
 Your Grocery is:
 <p th:text="${groceryDTO}"/>
 
