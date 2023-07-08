@@ -2,7 +2,9 @@ package com.grocerystore.service;
 
 import java.util.List;
 
+import com.grocerystore.dao.IGroceryDAO;
 import com.grocerystore.dto.GroceryDTO;
+import com.grocerystore.dto.ItemDTO;
 
 /**
  * CRUD operations for grocery.
@@ -24,12 +26,17 @@ public interface IGroceryService {
 	 * @return 
 	 *
 	 */
-	GroceryDTO save(GroceryDTO groceryDTO);
+	boolean save(GroceryDTO groceryDTO) throws Exception;
 	
 	/**
-	 * Return all grocery products
-	 * @return the collection of products
+	 * Return a list of items that containg strig.
+	 * @param string the search criteria.
+	 * @return a list of matching items
 	 */
-	List<GroceryDTO> fetchAll();
+	List<ItemDTO> fetchItems(String string);
+
+	void setGroceryDAO(IGroceryDAO groceryDAO);
+
+	IGroceryDAO getGroceryDAO();
 
 }

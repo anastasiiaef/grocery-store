@@ -1,5 +1,7 @@
 package com.grocerystore;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.grocerystore.dto.GroceryDTO;
+import com.grocerystore.dto.ItemDTO;
 import com.grocerystore.service.IGroceryService;
 
 @Controller
@@ -54,7 +57,6 @@ public class GroceryStoreController {
 		return modelAndView;
 	}
 	
-	
 	/**
 	 * Handle the /home endpoint.
 	 * @return
@@ -66,7 +68,6 @@ public class GroceryStoreController {
 		model.addAttribute("groceryDTO", groceryDTO);
 		return "home";
 	}
-	
 	
 	/**
 	 * Handle the /home endpoint.
@@ -99,6 +100,17 @@ public class GroceryStoreController {
 	@DeleteMapping("/home")
 	public String delete() {
 		return "home";
+	}
+	
+	/**
+	 * Handle the /home endpoint.
+	 * @return
+	 */
+	@RequestMapping(value="/searchItems")
+	public String searchItems(@RequestParam (value="searchTerm", required=false, defaultValue=" ") String searchTerm) {
+		String enhancedTerm = searchTerm  + "";	
+		List<ItemDTO> fetchItems = groceryServiceStub.fetchItems(searchTerm);
+		return "home";	
 	}
 
 }

@@ -5,7 +5,14 @@ public class GroceryDTO {
 	private int groceryId;
 	private String description;
 	private String name;
+	private int itemId;
 	
+	public int getItemId() {
+		return itemId;
+	}
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
+	}
 	public int getGroceryId() {
 		return groceryId;
 	}
@@ -31,4 +38,13 @@ public class GroceryDTO {
 		return groceryId + " " + name + " "+ description;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		boolean returnValue = false;
+		if (obj instanceof GroceryDTO) {
+			GroceryDTO incomingGrocery = (GroceryDTO) obj;
+			returnValue = incomingGrocery.getGroceryId() == getGroceryId();
+		}
+		return returnValue;
+	}
 }
