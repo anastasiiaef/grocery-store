@@ -112,5 +112,10 @@ public class GroceryStoreController {
 		List<ItemDTO> fetchItems = groceryServiceStub.fetchItems(searchTerm);
 		return "home";	
 	}
+	
+	@RequestMapping(value="/sustaianability")
+	public String sustainability () {
+		return "sustainability";
+	}
 
 }
