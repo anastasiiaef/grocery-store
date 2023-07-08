@@ -1,0 +1,11 @@
+{
+"products": [
+  {
+    "groceryId": "1",
+	"description": "The first product in the store",
+	"name": "Apple of Eden",
+	"itemId": "1"
+  }
+
+ ]
+}
