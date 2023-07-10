@@ -45,25 +45,23 @@
        
 <table class="tbody" id="products">
 </table>       
-       
 </main>        
-
-
-<form action="#" th:action="@{/searchItems}" method="GET">
-Welcome to the Grocery Store!
-<input type="text" name="searchTerm"/>
-<button name="submit" type="submit" value="0">Search</button>
-</form>
-</br>
-
+<div th:replace="fragments/topnav :: navbar"/></div>
 Your Grocery is:
 <p th:text="${groceryDTO}"/>
 
 <form action="#" th:action="@{/savegrocery}" th:object="${groceryDTO}" method="GET">
 	
-	Name: <input type="text" name="name" th:field="*{name}"/><br/>
-	Description: <input type="text" name="description" th:field="*{description}"/><br/>
-	
+	<div class="input-group mb-3">
+  		<span class="input-group-text" id="inputGroup-sizing-default">Name</span>
+  		<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="name" th:field="*{name}"/>
+	</div>
+
+	<div class="input-group mb-3">
+  		<span class="input-group-text" id="inputGroup-sizing-default">Description</span>
+  		<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="*{description}" th:field="*{description}"/>
+	</div>
+
 	<button name="submit" type="submit" value="0">Submit</button>
 </form>
 

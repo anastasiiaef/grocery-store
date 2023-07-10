@@ -10,10 +10,9 @@ import com.grocerystore.dao.IGroceryDAO;
 import com.grocerystore.dto.GroceryDTO;
 import com.grocerystore.dto.ItemDTO;
 
-@Component
+
 public class GroceryServiceStub implements IGroceryService {
 	
-	//@Autowired
 	private IGroceryDAO groceryDAO;
 	
 	@Override
@@ -41,15 +40,7 @@ public class GroceryServiceStub implements IGroceryService {
 		 return result;
 		
 	} 
-	
-	//List<GroceryDTO> allGroceryDTOs = new ArrayList<GroceryDTO>();
-	
-	//@Override
-	//public GroceryDTO save(GroceryDTO groceryDTO) {
-		//allGroceryDTOs.add(groceryDTO);
-		//return groceryDTO;
-	//}
-	
+
 	@Override
 	public List<ItemDTO> fetchItems(String searchTerm){
 		//stub out a item fetch mechanism
@@ -58,7 +49,7 @@ public class GroceryServiceStub implements IGroceryService {
 		if (searchTerm.contains("ilk") || searchTerm.contains("ruth")) {
 			ItemDTO item = new ItemDTO();
 			item.setBrand("Simple Truth");
-			item.setPrice("6.29$");
+			item.setPrice(6);
 			matchingItems.add(item);
 		}
 		return matchingItems;

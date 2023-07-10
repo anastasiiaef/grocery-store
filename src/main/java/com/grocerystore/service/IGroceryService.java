@@ -33,7 +33,7 @@ public interface IGroceryService {
 	 * @param string the search criteria.
 	 * @return a list of matching items
 	 */
-	List<ItemDTO> fetchItems(String string);
+	List<ItemDTO> fetchItems(String string) throws Exception;
 
 	void setGroceryDAO(IGroceryDAO groceryDAO);
 
