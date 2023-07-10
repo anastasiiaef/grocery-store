@@ -109,8 +109,19 @@ public class GroceryStoreController {
 	@RequestMapping(value="/searchItems")
 	public String searchItems(@RequestParam (value="searchTerm", required=false, defaultValue=" ") String searchTerm) {
 		String enhancedTerm = searchTerm  + "";	
-		List<ItemDTO> fetchItems = groceryServiceStub.fetchItems(searchTerm);
+		ModelAndView moselAndView = new ModelAndView();
+		try {
+			List<ItemDTO> fetchItems = groceryServiceStub.fetchItems(searchTerm);			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
 		return "home";	
+	}
+	
+	@RequestMapping(value="/sustainability")
+	public String sustainbility () {
+		return "sustainability";
 	}
 
 }
