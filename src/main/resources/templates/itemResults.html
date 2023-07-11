@@ -3,12 +3,20 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>GroceryStore.com</title>
+<link rel="stylesheet" href="/GroceryStore/src/main/resources/templates/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 </head>
 <body>
-
+  
 <div th:replace="fragments/topnav::navbar"/></div>
-Your sustainability rating is:
+<div th:replace="fragments/search::searchbar"/></div>
+<div class="list-group" th:each="item : ${items}">
 
+	<a class="list-group-item">
+		<p th:text="${item}"/>
+		<button class="btn btn-outline-success" type="add">Add</button> 
+	</a>
+</div>
 </body>
 </html>

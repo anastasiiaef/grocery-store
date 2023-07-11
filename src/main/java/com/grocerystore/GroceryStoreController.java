@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import java.util.ArrayList;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.grocerystore.dto.GroceryDTO;
 import com.grocerystore.dto.ItemDTO;
@@ -20,6 +24,8 @@ import com.grocerystore.service.IGroceryService;
 
 @Controller
 public class GroceryStoreController {
+	
+	Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private IGroceryService groceryServiceStub;
@@ -75,6 +81,7 @@ public class GroceryStoreController {
 	 */
 	@RequestMapping(value="/home", method=RequestMethod.GET)
 	public String read(Model model ) {
+		log.info("User has entered the /home endpoint");
 		model.addAttribute("groceryDTO", new GroceryDTO());
 		return "home";
 	}
@@ -98,7 +105,7 @@ public class GroceryStoreController {
 	}
 	
 	@DeleteMapping("/home")
-	public String delete() {
+	public String delete() {	
 		return "home";
 	}
 	
@@ -107,16 +114,23 @@ public class GroceryStoreController {
 	 * @return
 	 */
 	@RequestMapping(value="/searchItems")
-	public String searchItems(@RequestParam (value="searchTerm", required=false, defaultValue=" ") String searchTerm) {
-		String enhancedTerm = searchTerm  + "";	
-		ModelAndView moselAndView = new ModelAndView();
+	public ModelAndView searchItems(@RequestParam (value="searchTerm", required=false, defaultValue=" ") String searchTerm) {
+		ModelAndView modelAndView = new ModelAndView();
+		List<ItemDTO> items = new ArrayList<ItemDTO>();
 		try {
-			List<ItemDTO> fetchItems = groceryServiceStub.fetchItems(searchTerm);			
+			items = groceryServiceStub.fetchItems(searchTerm);
+			modelAndView.setViewName("itemResults");
+			if(items.size() == 0) {
+				log.warn("Received 0 results for search string: " + searchTerm);
+			}
 		} catch (Exception e) {
+			log.error("Error happened in searchItem endpoint", e);
 			e.printStackTrace();
-			return "error";
+			modelAndView.setViewName("error");
 		}
-		return "home";	
+		modelAndView.addObject("items", items);
+		log.debug("exiting search Items");
+		return modelAndView;	
 	}
 	
 	@RequestMapping(value="/sustainability")
