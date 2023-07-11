@@ -16,6 +16,8 @@ public class GroceryService implements IGroceryService {
 	@Autowired
 	IItemDAO itemDAO;
 
+	@Autowired 
+	IGroceryDAO groceryDAO;
 	@Override
 	public GroceryDTO fetchById(int id) {
 		// TODO Auto-generated method stub
@@ -25,6 +27,7 @@ public class GroceryService implements IGroceryService {
 	@Override
 	public boolean save(GroceryDTO groceryDTO) throws Exception {
 		// TODO Auto-generated method stub
+		groceryDAO.save(groceryDTO);
 		return false;
 	}
 

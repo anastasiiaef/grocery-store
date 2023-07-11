@@ -2,6 +2,7 @@ package com.grocerystore;
 
 import java.util.List;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,15 +19,29 @@ import com.grocerystore.dto.GroceryDTO;
 import com.grocerystore.dto.ItemDTO;
 import com.grocerystore.service.IGroceryService;
 
+import ch.qos.logback.classic.Logger;
+
 @Controller
 public class GroceryStoreController {
 	
+Logger log=(Logger) LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private IGroceryService groceryServiceStub;
 	
 	@RequestMapping(value="/savegrocery")
 	public String saveGrocery(GroceryDTO groceryDTO) {
+		groceryDTO.setDescription("sweet red strawberry");
+		groceryDTO.setName("Strawbwerry");
 		groceryDTO.setGroceryId(5);
+		groceryDTO.setItemId(4);
+		try {
+			groceryServiceStub.save(groceryDTO);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			log.error("unable to save", e);
+			e.printStackTrace();
+			return "error";
+		}
 		return "home";
 	}
 	
