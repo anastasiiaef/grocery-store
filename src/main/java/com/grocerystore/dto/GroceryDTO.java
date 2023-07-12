@@ -1,7 +1,15 @@
 package com.grocerystore.dto;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity 
+
 public class GroceryDTO {
-	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int groceryId;
 	private String description;
 	private String name;
