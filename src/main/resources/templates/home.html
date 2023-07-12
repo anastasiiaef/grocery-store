@@ -3,50 +3,30 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>GroceryStore.com</title>
-<link rel="stylesheet" href="/GroceryStore/src/main/resources/templates/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
-        <script>
-
-            $(function() {
-
-
-           var people = [];
-
-           $.getJSON('products.json', function(data) {
-               $.each(data.products, function(i, f) {
-                  var Row = '<div class="location">' + '<tr style="text-indent:25px;">' + '<td class="left">' +
-                  '</td>' + '<td>' + '<h1>' + f.name + '</h1>' +
-                  '<p>' + f.groceryId + ", " + f.description + ", " + f.itemId + '<p>' + '</td>' + '</tr>' + '</div>'
-                  $(Row).appendTo(".tbody");
-             });
-
-           });
-
-        });
-        </script>
 </head>
 <body>
 
-<main>
+<!-- <main> -->
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> -->
+<!--             <a class="navbar-brand" href="#">GroceryStore</a> -->
+<!--             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"> -->
+<!--                 <span class="navbar-toggler-icon"></span> -->
+<!--             </button> -->
+<!--             <div class="collapse navbar-collapse" id="navbarNavAltMarkup"> -->
+<!--                 <div class="navbar-nav"> -->
+<!--                     <a class="nav-item nav-link active" href="#">Home</a> -->
+<!--                 </div> -->
+<!--             </div> -->
+<!--         </nav> -->
+<!-- <table class="tbody" id="products"> -->
+<!-- </table>        -->
+<!-- </main>         -->
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">GroceryStore</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="#">Home</a>
-                </div>
-            </div>
-        </nav>
-       
-<table class="tbody" id="products">
-</table>       
-</main>        
-<div th:replace="fragments/topnav :: navbar"/></div>
+
+<div th:replace="fragments/topnav::navbar"/></div>
+<div th:replace="fragments/search::searchbar"/></div>
+</br>
 Your Grocery is:
 <p th:text="${groceryDTO}"/>
 
@@ -62,7 +42,7 @@ Your Grocery is:
   		<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="*{description}" th:field="*{description}"/>
 	</div>
 
-	<button name="submit" type="submit" value="0">Submit</button>
+	<button name="submit" type="submit" value="0">Check out</button>
 </form>
 
 </body>

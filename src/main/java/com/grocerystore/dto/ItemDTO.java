@@ -1,10 +1,21 @@
 package com.grocerystore.dto;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class ItemDTO {
+	@SerializedName("id")
+	@Expose
 	private int guid;
+	@SerializedName("name")
+	@Expose
 	private String brand;
+	@SerializedName("description")
+	@Expose
 	private String size;
-	private int price;
+	@SerializedName("calories")
+	@Expose
+	private double price;
 	
 	public int getGuid() {
 		return guid;
@@ -24,11 +35,16 @@ public class ItemDTO {
 	public void setSize(String size) {
 		this.size = size;
 	}
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
+	}
+	
+	@Override
+	public String toString() {
+		return brand + " " + size + " " + price + "$" + " 1lb";
 	}
 
 }
