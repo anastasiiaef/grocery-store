@@ -39,4 +39,6 @@ public interface IGroceryService {
 
 	IGroceryDAO getGroceryDAO();
 
+	Iterable<GroceryDTO> fetchAllGrocery() throws Exception;
+
 }

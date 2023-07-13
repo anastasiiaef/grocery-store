@@ -3,6 +3,7 @@ package com.grocerystore.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import com.grocerystore.dao.IGroceryDAO;
@@ -26,14 +27,19 @@ public class GroceryService implements IGroceryService {
 
 	@Override
 	public boolean save(GroceryDTO groceryDTO) throws Exception {
-		// TODO Auto-generated method stub
 		groceryDAO.save(groceryDTO);
 		return false;
 	}
 
 	@Override
+	@Cacheable("fetchItem")
 	public List<ItemDTO> fetchItems(String searchTerm) throws Exception {
 		return itemDAO.fetch(searchTerm);
+	}
+	
+	@Override
+	public Iterable<GroceryDTO> fetchAllGrocery() throws Exception {
+		return groceryDAO.fetchAll();
 	}
 
 	@Override
