@@ -54,4 +54,10 @@ public class GroceryServiceStub implements IGroceryService {
 		}
 		return matchingItems;
 	}
+
+	@Override
+	public Iterable<GroceryDTO> fetchAllGrocery() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

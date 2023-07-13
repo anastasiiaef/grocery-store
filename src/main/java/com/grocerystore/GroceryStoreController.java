@@ -21,31 +21,23 @@ import org.slf4j.LoggerFactory;
 
 import com.grocerystore.dto.GroceryDTO;
 import com.grocerystore.dto.ItemDTO;
+import com.grocerystore.dto.LabelValueDTO;
 import com.grocerystore.service.IGroceryService;
-
-import ch.qos.logback.classic.Logger;
 
 @Controller
 public class GroceryStoreController {
 	
-Logger log=(Logger) LoggerFactory.getLogger(this.getClass());
-
-	//Logger log = LoggerFactory.getLogger(this.getClass());
+	//Logger log = (Logger) LoggerFactory.getLogger(this.getClass());
+	Logger log = LoggerFactory.getLogger(this.getClass());
 	
-
 	@Autowired
 	private IGroceryService groceryServiceStub;
 	
 	@RequestMapping(value="/savegrocery")
 	public String saveGrocery(GroceryDTO groceryDTO) {
-		groceryDTO.setDescription("sweet red strawberry");
-		groceryDTO.setName("Strawbwerry");
-		groceryDTO.setGroceryId(5);
-		groceryDTO.setItemId(4);
 		try {
 			groceryServiceStub.save(groceryDTO);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			log.error("unable to save", e);
 			e.printStackTrace();
 			return "error";
@@ -154,5 +146,43 @@ Logger log=(Logger) LoggerFactory.getLogger(this.getClass());
 	public String sustainbility () {
 		return "sustainability";
 	}
+	
+	@RequestMapping(value="/itemNameAutocomplete")
+	@ResponseBody
+	public List<LabelValueDTO> itemNameAutocomplete(@RequestParam(value="term", required = false, defaultValue = "") String term) {		
+		List<LabelValueDTO> suggestions = new ArrayList<LabelValueDTO>();
+		try {
+			List<ItemDTO> allItems = groceryServiceStub.fetchItems(term);
+			for (ItemDTO itemDTO: allItems) {
+				LabelValueDTO lv = new LabelValueDTO();
+				lv.setLabel(itemDTO.toString());
+				lv.setValue(Integer.toString(itemDTO.getGuid()));
+				suggestions.add(lv);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("Exception in autocomplete", e);
+		}
+		return suggestions; 
+	}
+	
+	@RequestMapping(value="/showGrocery")
+	public ModelAndView showGrocery() {
+		ModelAndView modelAndView = new ModelAndView();
+		
+		try {
+			Iterable<GroceryDTO> allGrocery = groceryServiceStub.fetchAllGrocery();
+			modelAndView.setViewName("showGrocery");
+			modelAndView.addObject("allGrocery", allGrocery);
+		} catch(Exception e) {
+			e.printStackTrace();
+			log.error("Unable to retriev grocry", e);
+			modelAndView.setViewName("error");
+		}
+		return modelAndView;
+	}
+
+	
+
 
 }

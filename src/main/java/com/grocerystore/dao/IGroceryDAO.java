@@ -6,4 +6,6 @@ public interface IGroceryDAO {
 	
 	boolean save(GroceryDTO groceryDTO) throws Exception;
 
+	Iterable<GroceryDTO> fetchAll() throws Exception;
+
 }

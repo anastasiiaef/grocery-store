@@ -10,11 +10,15 @@ public class GroceryDAO implements IGroceryDAO {
 
 	@Autowired
 	GroceryRepository groceryRepository;
+	
 	@Override
 	public boolean save(GroceryDTO groceryDTO) throws Exception {
-		// TODO Auto-generated method stub
 		groceryRepository.save(groceryDTO);
 		return false;
 	}
-
+	
+	@Override
+	public Iterable<GroceryDTO> fetchAll() throws Exception {
+		return groceryRepository.findAll();
+	}
 }
