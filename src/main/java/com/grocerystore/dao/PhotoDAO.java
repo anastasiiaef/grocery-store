@@ -17,10 +17,13 @@ public class PhotoDAO implements IPhotoDAO {
 	private PhotoRepository photoRepository;
 	
 	@Override
-	public void savePhotoImage(MultipartFile imageFile) throws Exception {
-	String folder = "/photos/";
+	public void savePhotoImage(PhotoDTO photoDTO, MultipartFile imageFile) throws Exception {
+	//gets us to src/main/resources without knowing the full path		
+	Path currentPath = Paths.get(".");
+	Path absolutePath = currentPath.toAbsolutePath();
+	photoDTO.setPath(absolutePath + "/src/main/resources/static/photos");
 	byte[] bytes = imageFile.getBytes();
-	Path path = Paths.get(folder+imageFile.getOriginalFilename());		
+	Path path = Paths.get(photoDTO.getPath() + imageFile.getOriginalFilename());		
 	Files.write(path, bytes);
 	}
 

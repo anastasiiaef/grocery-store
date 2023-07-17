@@ -36,30 +36,33 @@ public class GroceryStoreController {
 	private IGroceryService groceryServiceStub;
 	
 	@PostMapping(value="/savegrocery")
-	public String saveGrocery(@RequestParam("imageFile") MultipartFile imageFile, GroceryDTO groceryDTO) {
+	public ModelAndView saveGrocery(@RequestParam("imageFile") MultipartFile imageFile, GroceryDTO groceryDTO) {
+		ModelAndView modelAndView = new ModelAndView();
+		
 		try {
 			groceryServiceStub.save(groceryDTO);
 		} catch (Exception e) {
 			log.error("unable to save", e);
 			e.printStackTrace();
-			return "error";
-		}
-		String returnValue = "home";
-		
+			modelAndView.setViewName("error");
+			return modelAndView;
+		}	
 		PhotoDTO photoDTO = new PhotoDTO();
 		photoDTO.setFileName(imageFile.getOriginalFilename());
 		photoDTO.setPath("/photo/");
 		photoDTO.setGroceryDTO(groceryDTO);
-		
+		modelAndView.setViewName("success");
 		try {
 			groceryServiceStub.saveImage(imageFile, photoDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error("Error saving photo", e);
-			returnValue="error";
-		}
-		
-		return returnValue;
+			modelAndView.setViewName("error");
+			return modelAndView;
+		}		
+		modelAndView.addObject("photoDTO", photoDTO);
+		modelAndView.addObject("groceryDTO" ,groceryDTO);
+		return modelAndView;
 	}
 	
 	/**
@@ -217,6 +220,14 @@ public class GroceryStoreController {
 		return modelAndView;
 	}
 
+	@RequestMapping("/showGroceryDetails")
+	public ModelAndView showGroceryDetails(@RequestParam("item_ID") int itemId) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("groceryDetails");
+		List<GroceryDTO> grocery = groceryServiceStub.fetchGroceryByItemId(itemId);
+		modelAndView.addObject("grocery", grocery);
+		return modelAndView;
+	}
 
 
 

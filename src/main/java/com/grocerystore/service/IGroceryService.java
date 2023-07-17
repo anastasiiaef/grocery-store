@@ -46,4 +46,6 @@ public interface IGroceryService {
 
 	void saveImage(MultipartFile imageFile, PhotoDTO photoDTO) throws Exception;
 
+	List<GroceryDTO> fetchGroceryByItemId(int itemID);
+
 }
