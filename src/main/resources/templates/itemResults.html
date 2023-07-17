@@ -12,11 +12,16 @@
 <div th:replace="fragments/topnav::navbar"/></div>
 <div th:replace="fragments/search::searchbar"/></div>
 
-<div class="list-group" th:each="item : ${items}">
-	<a th:href="@{/showGroceryDetails(item_ID=${item.guid})}" class="list-group-item">
+<!-- 	<form action="#" th:action="@{/groceryDetails}" th:object="${groceryDTO}" method="POST" enctype="multipart/form-data">			 -->
+		
+	<div class="list-group" th:each="item : ${items}">
+
+	<a th:href="@{/showGroceryDetails(item_ID=${item.guid})}" class ="list-group-item list-group-item-action">
 		<p th:text="${item}"/>
-		<button class="btn btn-outline-success" type="add">Add</button> 
 	</a>
 </div>
+<!-- 		<button class="btn btn-outline-success" type="submit">Details</button>  -->
+<!-- 	    <img class="d-block w-100" th:src="@{${'/photos/photosAppleRed.jpg'}}" alt="Start Slideshow"> -->
+	
 </body>
 </html>

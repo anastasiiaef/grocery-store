@@ -10,11 +10,9 @@
 <body>
   
 <div th:replace="fragments/topnav::navbar"/></div>
-<div th:replace="fragments/search::searchbar"/></div>
+ <h1>Your cart:</h1>
 <ul class="list-group" th:each="grocery : ${allGrocery}">
-
-		<li class="list-group-item"><div th:text="${grocery}"></div></li>
-
+	<li class="list-group-item"><div th:text="${grocery}"></div></li>
 </ul>
 </body>
 </html>

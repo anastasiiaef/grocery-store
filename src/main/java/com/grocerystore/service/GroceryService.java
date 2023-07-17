@@ -64,9 +64,9 @@ public class GroceryService implements IGroceryService {
 	}
 	
 	@Override
-	public void saveImage(MultipartFile imageFile, PhotoDTO photoDTO) throws Exception {
-		photoDAO.save(photoDTO);;
+	public void saveImage(MultipartFile imageFile, PhotoDTO photoDTO) throws Exception {	
 		photoDAO.savePhotoImage(photoDTO, imageFile);
+		photoDAO.save(photoDTO);
 	}
 
 	@Override

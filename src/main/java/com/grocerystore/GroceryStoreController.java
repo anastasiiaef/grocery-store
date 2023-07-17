@@ -28,8 +28,7 @@ import com.grocerystore.service.IGroceryService;
 
 @Controller
 public class GroceryStoreController {
-	
-	//Logger log = (Logger) LoggerFactory.getLogger(this.getClass());
+
 	Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
@@ -206,15 +205,14 @@ public class GroceryStoreController {
 	
 	@RequestMapping(value="/showGrocery")
 	public ModelAndView showGrocery() {
-		ModelAndView modelAndView = new ModelAndView();
-		
+		ModelAndView modelAndView = new ModelAndView();	
 		try {
 			Iterable<GroceryDTO> allGrocery = groceryServiceStub.fetchAllGrocery();
-			modelAndView.setViewName("showGrocery");
+			modelAndView.setViewName("showGrocery");		
 			modelAndView.addObject("allGrocery", allGrocery);
 		} catch(Exception e) {
 			e.printStackTrace();
-			log.error("Unable to retriev grocry", e);
+			log.error("Unable to retriev grocery", e);
 			modelAndView.setViewName("error");
 		}
 		return modelAndView;
@@ -228,7 +226,5 @@ public class GroceryStoreController {
 		modelAndView.addObject("grocery", grocery);
 		return modelAndView;
 	}
-
-
 
 }

@@ -1,11 +1,14 @@
 package com.grocerystore.dto;
 
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,6 +28,15 @@ public class GroceryDTO {
 	@Column(name="ITEM_NAME")
 	private String itemName;
 	
+	@OneToMany(mappedBy="groceryDTO")
+	private List<PhotoDTO> photos;
+	
+	public List<PhotoDTO> getPhotos() {
+		return photos;
+	}
+	public void setPhotos(List<PhotoDTO> photos) {
+		this.photos = photos;
+	}
 	public int getItemId() {
 		return itemId;
 	}
@@ -58,7 +70,7 @@ public class GroceryDTO {
 
 	@Override
 	public String toString() {
-		return groceryId + " " + name + " "+ description;
+		return name + " "+ description  + " " + itemName;
 	}
 
 	@Override
