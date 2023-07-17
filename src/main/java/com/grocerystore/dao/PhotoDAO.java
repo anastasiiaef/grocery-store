@@ -21,7 +21,7 @@ public class PhotoDAO implements IPhotoDAO {
 	//gets us to src/main/resources without knowing the full path		
 	Path currentPath = Paths.get(".");
 	Path absolutePath = currentPath.toAbsolutePath();
-	photoDTO.setPath(absolutePath + "/src/main/resources/static/photos");
+	photoDTO.setPath(absolutePath + "/src/main/resources/static/photos/");
 	byte[] bytes = imageFile.getBytes();
 	Path path = Paths.get(photoDTO.getPath() + imageFile.getOriginalFilename());		
 	Files.write(path, bytes);

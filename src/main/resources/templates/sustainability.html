@@ -8,7 +8,15 @@
 <body>
 
 <div th:replace="fragments/topnav::navbar"/></div>
-Your sustainability rating is:
+<h1>Your cart:</h1>
+
+
+<div class="list-group" th:each="grocery : ${grocery}">
+	<a th:href="@{/showGroceryDetails(item_ID=${item.guid})}" class="list-group-item">
+		<p th:text="${grocery}"/>
+		<button class="btn btn-outline-success" type="add">Add</button> 
+	</a>
+</div>
 
 </body>
 </html>

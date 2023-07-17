@@ -34,40 +34,31 @@ $(function() {
 	<div th:replace="fragments/topnav::navbar"/></div>
 	<div th:replace="fragments/search::searchbar"/></div>
 
-	Your Grocery is:
+</br>
+	<h1>Your Grocery is: 
 	<p th:text="${groceryDTO}"/>
+	</h1>
 	
 	<form action="#" th:action="@{/savegrocery}" th:object="${groceryDTO}" method="POST" enctype="multipart/form-data">	
 		
 		<div class="input-group mb-3">
-	  		<span class="input-group-text" id="inputGroup-sizing-default">Item Name</span>
+	  		<span class="input-group-text" id="inputGroup-sizing-default">Enter you Item</span>
 	  		<input id="Item_Name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="*{itemName}" th:field="*{itemName}"/>
 		</div>
 		
 		<div class="input-group mb-3">
-	  		<span class="input-group-text" id="inputGroup-sizing-default">Name</span>
-	  		<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="name" th:field="*{name}"/>
-		</div>
-	
-		<div class="input-group mb-3">
 	  		<span class="input-group-text" id="inputGroup-sizing-default">Amount</span>
 	  		<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="*{description}" th:field="*{description}"/>
 		</div>
-
-	
+		
 		<div class="input-group mb-3">
-	  		<span class="input-group-text" id="inputGroup-sizing-default">Item ID</span>
-	  		<input id="Item_ID" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="*{itemId}" th:field="*{itemId}">
-  		
-		</div>
-		
+	  		<span class="input-group-text" id="inputGroup-sizing-default">Enter your Name</span>
+	  		<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="name" th:field="*{name}"/>
+		</div>		
 		<input id="Item_ID" type="hidden" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="*{itemId}" th:field="*{itemId}">  			  		
-		
-
 		<input type="file" name="imageFile">
 		<input type="submit" value="Upload"/>	
 	</form>
 	
-
 </body>
 </html>
