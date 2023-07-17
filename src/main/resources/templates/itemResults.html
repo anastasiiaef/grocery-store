@@ -11,8 +11,8 @@
   
 <div th:replace="fragments/topnav::navbar"/></div>
 <div th:replace="fragments/search::searchbar"/></div>
-<div class="list-group" th:each="item : ${items}">
 
+<div class="list-group" th:each="item : ${items}">
 	<a class="list-group-item">
 		<p th:text="${item}"/>
 		<button class="btn btn-outline-success" type="add">Add</button> 

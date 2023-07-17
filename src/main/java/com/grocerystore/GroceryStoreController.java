@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
 
@@ -22,6 +23,7 @@ import org.slf4j.LoggerFactory;
 import com.grocerystore.dto.GroceryDTO;
 import com.grocerystore.dto.ItemDTO;
 import com.grocerystore.dto.LabelValueDTO;
+import com.grocerystore.dto.PhotoDTO;
 import com.grocerystore.service.IGroceryService;
 
 @Controller
@@ -33,8 +35,8 @@ public class GroceryStoreController {
 	@Autowired
 	private IGroceryService groceryServiceStub;
 	
-	@RequestMapping(value="/savegrocery")
-	public String saveGrocery(GroceryDTO groceryDTO) {
+	@PostMapping(value="/savegrocery")
+	public String saveGrocery(@RequestParam("imageFile") MultipartFile imageFile, GroceryDTO groceryDTO) {
 		try {
 			groceryServiceStub.save(groceryDTO);
 		} catch (Exception e) {
@@ -42,7 +44,22 @@ public class GroceryStoreController {
 			e.printStackTrace();
 			return "error";
 		}
-		return "home";
+		String returnValue = "home";
+		
+		PhotoDTO photoDTO = new PhotoDTO();
+		photoDTO.setFileName(imageFile.getOriginalFilename());
+		photoDTO.setPath("/photo/");
+		photoDTO.setGroceryDTO(groceryDTO);
+		
+		try {
+			groceryServiceStub.saveImage(imageFile, photoDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("Error saving photo", e);
+			returnValue="error";
+		}
+		
+		return returnValue;
 	}
 	
 	/**
@@ -166,6 +183,24 @@ public class GroceryStoreController {
 		return suggestions; 
 	}
 	
+	@PostMapping("/uploadImage")
+	public String uploadImage(@RequestParam("imageFile") MultipartFile imageFile) {
+		String returnValue = "home";
+		
+		PhotoDTO photoDTO = new PhotoDTO();
+		photoDTO.setFileName(imageFile.getOriginalFilename());
+		photoDTO.setPath("/photo/");
+		try {
+			groceryServiceStub.saveImage(imageFile, photoDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("Error saving photo", e);
+			returnValue="error";
+		}
+		
+		return returnValue;
+	}
+	
 	@RequestMapping(value="/showGrocery")
 	public ModelAndView showGrocery() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -182,7 +217,7 @@ public class GroceryStoreController {
 		return modelAndView;
 	}
 
-	
+
 
 
 }

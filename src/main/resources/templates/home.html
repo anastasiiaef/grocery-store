@@ -33,11 +33,11 @@ $(function() {
 <body>
 	<div th:replace="fragments/topnav::navbar"/></div>
 	<div th:replace="fragments/search::searchbar"/></div>
-	</br>
+
 	Your Grocery is:
 	<p th:text="${groceryDTO}"/>
 	
-	<form action="#" th:action="@{/savegrocery}" th:object="${groceryDTO}" method="GET">	
+	<form action="#" th:action="@{/savegrocery}" th:object="${groceryDTO}" method="POST" enctype="multipart/form-data">	
 		
 		<div class="input-group mb-3">
 	  		<span class="input-group-text" id="inputGroup-sizing-default">Item Name</span>
@@ -57,15 +57,17 @@ $(function() {
 	
 		<div class="input-group mb-3">
 	  		<span class="input-group-text" id="inputGroup-sizing-default">Item ID</span>
-	  		<input id="Item_ID" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="*{itemId}" th:field="*{itemId}"/>
+	  		<input id="Item_ID" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="*{itemId}" th:field="*{itemId}">
   		
 		</div>
 		
-		<input id="Item_ID" type="hidden" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="*{itemId}" th:field="*{itemId}"/>
-	  		
-	  		
-		<button name="submit" type="submit" value="0">Check out</button>
+		<input id="Item_ID" type="hidden" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="*{itemId}" th:field="*{itemId}">  			  		
+		
+
+		<input type="file" name="imageFile">
+		<input type="submit" value="Upload"/>	
 	</form>
+	
 
 </body>
 </html>
