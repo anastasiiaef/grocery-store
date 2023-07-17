@@ -11,9 +11,9 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name="grocery", schema = "PUBLIC")
 public class GroceryDTO {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	
 	@Column(name="GROCERY_ID")
 	private int groceryId;
 	@Column(name="ITEM_ID")

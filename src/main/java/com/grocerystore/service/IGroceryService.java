@@ -2,9 +2,12 @@ package com.grocerystore.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.grocerystore.dao.IGroceryDAO;
 import com.grocerystore.dto.GroceryDTO;
 import com.grocerystore.dto.ItemDTO;
+import com.grocerystore.dto.PhotoDTO;
 
 /**
  * CRUD operations for grocery.
@@ -40,5 +43,7 @@ public interface IGroceryService {
 	IGroceryDAO getGroceryDAO();
 
 	Iterable<GroceryDTO> fetchAllGrocery() throws Exception;
+
+	void saveImage(MultipartFile imageFile, PhotoDTO photoDTO) throws Exception;
 
 }

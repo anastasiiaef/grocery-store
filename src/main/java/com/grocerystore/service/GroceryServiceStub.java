@@ -5,10 +5,12 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.grocerystore.dao.IGroceryDAO;
 import com.grocerystore.dto.GroceryDTO;
 import com.grocerystore.dto.ItemDTO;
+import com.grocerystore.dto.PhotoDTO;
 
 
 public class GroceryServiceStub implements IGroceryService {
@@ -59,5 +61,13 @@ public class GroceryServiceStub implements IGroceryService {
 	public Iterable<GroceryDTO> fetchAllGrocery() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+
+	@Override
+	public void saveImage(MultipartFile imageFile, PhotoDTO photoDTO) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 }
