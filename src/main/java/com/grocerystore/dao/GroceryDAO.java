@@ -1,5 +1,7 @@
 package com.grocerystore.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,5 +22,10 @@ public class GroceryDAO implements IGroceryDAO {
 	@Override
 	public Iterable<GroceryDTO> fetchAll() throws Exception {
 		return groceryRepository.findAll();
+	}
+	
+	@Override
+	public List<GroceryDTO> fetchGroceryByItemId(int itemID) {
+		return groceryRepository.findByItemId(itemID);
 	}
 }

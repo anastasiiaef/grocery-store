@@ -12,9 +12,9 @@
 <div th:replace="fragments/topnav::navbar"/></div>
 <div th:replace="fragments/search::searchbar"/></div>
 
-<div class="list-group" th:each="item : ${items}">
-	<a th:href="@{/showGroceryDetails(item_ID=${item.guid})}" class="list-group-item">
-		<p th:text="${item}"/>
+<div class="list-group" th:each="grocery : grocery">
+	<a th:href="@{/home}" class="list-group-item">
+		<p th:text="${grocery}"/>
 		<button class="btn btn-outline-success" type="add">Add</button> 
 	</a>
 </div>

@@ -6,7 +6,7 @@ import com.grocerystore.dto.PhotoDTO;
 
 public interface IPhotoDAO {
 
-	void savePhotoImage(MultipartFile imageFile) throws Exception;
+	void savePhotoImage(PhotoDTO photoDTO, MultipartFile imageFile) throws Exception;
 
 	void save(PhotoDTO photoDTO);
 

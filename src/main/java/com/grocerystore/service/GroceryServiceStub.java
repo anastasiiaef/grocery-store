@@ -70,4 +70,10 @@ public class GroceryServiceStub implements IGroceryService {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public List<GroceryDTO> fetchGroceryByItemId(int itemID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
