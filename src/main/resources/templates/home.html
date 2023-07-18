@@ -35,14 +35,14 @@ $(function() {
 	<div th:replace="fragments/search::searchbar"/></div>
 
 </br>
-	<h1>Your Grocery is: 
+	<a>Your Grocery is: 
 	<p th:text="${groceryDTO}"/>
-	</h1>
+	</a>
 	
 	<form action="#" th:action="@{/savegrocery}" th:object="${groceryDTO}" method="POST" enctype="multipart/form-data">	
 		
 		<div class="input-group mb-3">
-	  		<span class="input-group-text" id="inputGroup-sizing-default">Enter you Item</span>
+	  		<span class="input-group-text" id="inputGroup-sizing-default">Item Name</span>
 	  		<input id="Item_Name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="*{itemName}" th:field="*{itemName}"/>
 		</div>
 		
@@ -52,7 +52,7 @@ $(function() {
 		</div>
 		
 		<div class="input-group mb-3">
-	  		<span class="input-group-text" id="inputGroup-sizing-default">Enter your Name</span>
+	  		<span class="input-group-text" id="inputGroup-sizing-default">Brand</span>
 	  		<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="name" th:field="*{name}"/>
 		</div>		
 		<input id="Item_ID" type="hidden" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="*{itemId}" th:field="*{itemId}">  			  		
