@@ -33,6 +33,11 @@ public class GroceryStoreController {
 	
 	@Autowired
 	private IGroceryService groceryServiceStub;
+	//this is a change
+	private List<ItemDTO> allItems;
+	private String firstThreeCharacters;
+	//end change
+	
 	
 	@PostMapping(value="/savegrocery")
 	public ModelAndView saveGrocery(@RequestParam("imageFile") MultipartFile imageFile, GroceryDTO groceryDTO) {
@@ -171,7 +176,28 @@ public class GroceryStoreController {
 	public List<LabelValueDTO> itemNameAutocomplete(@RequestParam(value="term", required = false, defaultValue = "") String term) {		
 		List<LabelValueDTO> suggestions = new ArrayList<LabelValueDTO>();
 		try {
-			List<ItemDTO> allItems = groceryServiceStub.fetchItems(term);
+			//this is a change
+			if (term.length() == 3) {
+				firstThreeCharacters = term;
+				allItems = groceryServiceStub.fetchItems(term);
+			}
+			
+			for (ItemDTO itemDTO : allItems) {
+				if (itemDTO.toString().contains(term)) {
+					LabelValueDTO lv = new LabelValueDTO();
+					lv.setLabel(itemDTO.toString());
+					lv.setValue(Integer.toString(itemDTO.getGuid()));
+					suggestions.add(lv);
+				}
+			}
+		}
+			catch (Exception e) {
+				e.printStackTrace();
+				log.error("Exception in autocomplete", e);
+			}
+		
+		//this is the original
+			/*List<ItemDTO> allItems = groceryServiceStub.fetchItems(term);
 			for (ItemDTO itemDTO: allItems) {
 				LabelValueDTO lv = new LabelValueDTO();
 				lv.setLabel(itemDTO.toString());
@@ -181,7 +207,7 @@ public class GroceryStoreController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error("Exception in autocomplete", e);
-		}
+		}*/
 		return suggestions; 
 	}
 	
